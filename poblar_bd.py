@@ -4,7 +4,7 @@ def poblar_datos():
     conexion = sqlite3.connect('database.db')
     cursor = conexion.cursor()
     
-    # 1. Insertar categorías de servicio estándar
+    # 1. Insertamos las categorías de los servicios que se mostraran
     categorias = [
         (1, 'Consulta médica'),
         (2, 'Urgencias'),
@@ -13,7 +13,7 @@ def poblar_datos():
     ]
     cursor.executemany("INSERT OR IGNORE INTO categoria_servicio (id_categoria, nombre) VALUES (?, ?)", categorias)
     
-    # 2. Insertar las instituciones reales de la tabla aprobada
+    # 2. Insertamos las instituciones reales de la tabla. 
     instituciones = [
         (1, '1900100031', 'Hospital Universitario San José ESE', 'Cra. 6 #10N-142 (Barrio Bolívar)', 2.44991, -76.59992, '(602) 8234508', 'Pública', '2026-11-06'),
         (2, '1900100023', 'Hospital Susana López de Valencia', 'Calle 15 # 17A - 196 (Barrio La Ladera)', 2.437922, -76.619333, '(602) 8386363', 'Pública', '2026-11-06'),
@@ -26,7 +26,7 @@ def poblar_datos():
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ''', instituciones)
     
-    # 3. Relacionar instituciones con servicios (por defecto las asociamos a Urgencias y Consulta médica para pruebas)
+    # 3. Relacionamos las instituciones con servicios (por defecto las asociamos a Urgencias y Consulta médica para pruebas)
     relaciones = [
         (1, 2, '24 Horas'), # San José - Urgencias
         (1, 1, 'Lunes a Viernes'), # San José - Consulta

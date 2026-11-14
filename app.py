@@ -36,7 +36,7 @@ def obtener_ruta_osrm(origen_coords, destino_coords):
                 duracion_segundos = route['duration'] # Duración en segundos
                 distancia_metros = route['distance']   # Distancia en metros
                 
-                # Coordenadas de la ruta para dibujar la línea (viene como [lon, lat], Folium necesita [lat, lon])
+                # Coordenadas de la ruta para dibujar la línea.
                 geometria = route['geometry']['coordinates']
                 coordenadas_ruta = [[coord[1], coord[0]] for coord in geometria]
                 
@@ -49,7 +49,7 @@ def obtener_ruta_osrm(origen_coords, destino_coords):
     
     return None, 0, 0
 
-# Inicializar estados de navegación y variables de sesión
+# Iniciamos los estados de navegación y variables de sesión
 if 'pagina' not in st.session_state:
     st.session_state.pagina = 'inicio'
 if 'categoria_seleccionada' not in st.session_state:
