@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 def conectar_bd():
-    return sqlite3.connect('database.db')
+    return sqlite3.connect('data/database.db')
 
 import requests
 
@@ -138,7 +138,7 @@ elif st.session_state.pagina in ['resultados', 'detalle']:
     with placeholder_principal.container():
         
         # ------------------------------------------
-        # VISTA DE RESULTADOS
+        # VISTA 2: RESULTADOS
         # ------------------------------------------
         if st.session_state.pagina == 'resultados':
             if st.button("← Nueva búsqueda"):
@@ -209,7 +209,7 @@ elif st.session_state.pagina in ['resultados', 'detalle']:
                 components.html(mapa_popayan._repr_html_(), height=450)
 
         # ------------------------------------------
-        # VISTA DE DETALLE
+        # VISTA 3: DETALLE
         # ------------------------------------------
         elif st.session_state.pagina == 'detalle':
             if st.button("← Volver a los resultados"):
@@ -249,18 +249,18 @@ elif st.session_state.pagina in ['resultados', 'detalle']:
                 with col_det2:
                     st.markdown("#### Ruta y Ubicación Exacta")
             
-            # Consultar ruta real usando OSRM
+            # Consultamos la ruta real usando OSRM
             coords_inst = (inst[4], inst[5])
             ruta_coords, tiempo_min, distancia_km = obtener_ruta_osrm(st.session_state.coords_usuario, coords_inst)
             
-            # Mostrar métricas estilo Maps
+            # Mostramos métricas del estilo Maps
             col_m1, col_m2 = st.columns(2)
             with col_m1:
                 st.metric(label="⏱️ Tiempo estimado en carro", value=f"{tiempo_min} minutos")
             with col_m2:
                 st.metric(label="🛣️ Distancia por vía", value=f"{distancia_km} km")
             
-            # Crear mapa centrado entre el usuario y el hospital
+            # Creamos el mapa centrado entre el usuario y el hospital
             mapa_detalle = folium.Map(location=[inst[4], inst[5]], zoom_start=15)
             
             # Si OSRM devolvió la ruta por las calles, la dibujamos
